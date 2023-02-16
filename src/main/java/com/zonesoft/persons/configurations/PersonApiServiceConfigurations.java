@@ -34,8 +34,6 @@ public class PersonApiServiceConfigurations {
 						"http://localhost:1111",
 						"http://65.109.4.15:1111")
 				.allowedMethods("GET", "POST", "PUT", "DELETE");
-//				registry.addMapping("/**").allowedOrigins("http://localhost:8080","http://localhost:3000","http://192.168.1.60:8080","http://192.168.1.60:3000" );
-//				registry.addMapping("/**").allowedOrigins("http://localhost:3000");
 			}
 		};
 	}
