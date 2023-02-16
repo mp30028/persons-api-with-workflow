@@ -89,6 +89,13 @@
       </plugin>
     </plugins>
   </build>
+  <distributionManagement>
+    <repository>
+      <id>github</id>
+      <name>GitHub Packages</name>
+      <url>https://maven.pkg.github.com/mp30028/persons-api</url>
+    </repository>
+  </distributionManagement>  
 
   <description>A small API with a GitHub Workflow to build, test and deploy it
 </description>
