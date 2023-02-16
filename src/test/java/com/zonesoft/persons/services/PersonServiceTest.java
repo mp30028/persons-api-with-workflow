@@ -37,8 +37,7 @@ class PersonServiceTest {
 		this.mockReactiveTemplate = mock(ReactiveMongoTemplate.class);
 		this.mockEventRepository = mock(PersistenceEventRepository.class);
 		service = new PersonService(mockRepository,mockEventRepository,mockReactiveTemplate);
-	}
-	
+	}	
 	
 	@AfterEach
 	void cleanupAfterEach() {

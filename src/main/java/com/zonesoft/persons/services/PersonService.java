@@ -10,7 +10,6 @@ import org.springframework.data.mongodb.core.ChangeStreamOptions;
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
 import org.springframework.stereotype.Service;
 
-
 import com.zonesoft.persons.events.PersistenceEvent;
 import com.zonesoft.persons.events.PersistenceEvent.PersistenceEventType;
 import com.zonesoft.persons.events.PersistenceEventRepository;

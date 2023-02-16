@@ -37,7 +37,6 @@ class RepositoryIntegrationTest{
     	MONGODB_CONTAINER = new MongoDBContainer(DockerImageName.parse(IMAGE_NAME));
         MONGODB_CONTAINER.start();
     }
-
 	
 	@DynamicPropertySource
 	static void setProperties(DynamicPropertyRegistry registry) {		
@@ -47,7 +46,6 @@ class RepositoryIntegrationTest{
 	@Autowired
 	private PersonRepository personRepository;
 
-	
 	private Person  createAndInsertSinglePerson() {
 		PersonRecordBuilder generator = new PersonRecordBuilder();
 		Person generatedPerson = generator.moniker().firstname().lastname().build();

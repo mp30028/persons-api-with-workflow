@@ -15,8 +15,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.zonesoft.persons.models.Person;
 import com.zonesoft.persons.repositories.PersonRepository;
 
-
-
 @SpringBootTest
 public class PersonDataGenerator {
 	private static final Logger LOGGER = LoggerFactory.getLogger(PersonDataGenerator.class);

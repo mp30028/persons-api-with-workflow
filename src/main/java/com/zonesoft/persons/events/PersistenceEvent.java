@@ -1,7 +1,5 @@
 package com.zonesoft.persons.events;
 
-
-
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
@@ -11,7 +9,6 @@ import com.zonesoft.persons.models.Person;
 import com.zonesoft.persons.utils.ToStringBuilder;
 
 import static com.zonesoft.persons.utils.ToStringBuilder.*;
-
 
 @Document(collection = "persistenceEvents")
 public class PersistenceEvent {
