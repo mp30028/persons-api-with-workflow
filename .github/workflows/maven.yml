@@ -1,11 +1,16 @@
 name: Maven CI/CD
 
 on:
- push:
-    branches: [ main ]
+# push:
+#    branches: [ main ]
     
- pull_request:
+# pull_request:
+#    branches: [ main ]
+  merge_group:
     branches: [ main ]
+
+env:
+  staging_folder: staging
 
 jobs:
   build_and_test:
@@ -41,9 +46,42 @@ jobs:
             distribution: 'temurin' 
         - run: mvn -B package --file pom.xml -DskipTests
         #- run: mkdir staging && cp target/*jar-with-dependencies.jar staging
-        - run: mkdir staging && cp target/*.jar staging
+        - run: mkdir ${{ env.staging_folder }} && cp target/*.jar ${{ env.staging_folder }}
         
         - uses: actions/upload-artifact@v3
           with:
             name: Package
-            path: staging      
+            path: ${{ env.staging_folder }}
+
+  push-to-remote-job:
+      runs-on: ubuntu-latest
+      needs: [publish-job]            
+
+      
+      steps:
+      # Checkout the repository this workflow belongs to using a ready made global action called checkout
+      # The repository name is in an env variable called $GITHUB_WORKSPACE which this action uses 
+      - uses: actions/checkout@v3
+      
+      - name: Make staging directory
+        run: mkdir ./${{ env.staging_folder }}
+      
+      - name: Download the package
+        uses: actions/download-artifact@v3
+        with:
+          name: Package
+          path: ${{ env.staging_folder }}
+        
+#      - name: Copy data to be transferred to staging
+#        run: cp -r .${{ vars.SOURCE_FILEPATH  }} ./${{ env.staging_folder }}/${{ vars.SOURCE_FILEPATH  }}
+
+      
+      #  Check out the sftp-folder-to-remote action
+      - uses: mp30028/persons-api-with-workflow/.actions/sftp-folder-to-remote@main
+        with:
+          remote_username: ${{ secrets.REMOTE_USERNAME  }}
+          remote_host: ${{ secrets.REMOTE_SERVER  }}
+          remote_port: ${{ secrets.REMOTE_PORT  }}
+          remote_ssh_key: ${{ secrets.REMOTE_SSH_KEY  }}
+          local_filepath: ./${{ env.staging_folder }} 
+          remote_filepath: ${{ vars.REMOTE_FILEPATH  }} 
